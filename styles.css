@@ -592,6 +592,216 @@ a {
   padding: 12px 22px;
 }
 
+/* Container establishing the 3D space */
+.couple-portrait-card {
+  width: 400px; /* Adjust to match your design */
+  height: 600px; /* Adjust to match your design */
+  perspective: 1000px; /* Gives the 3D depth effect */
+  cursor: pointer;
+}
+
+/* The wrapper that actually rotates */
+.portrait-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d; /* Keeps child elements in 3D space */
+}
+
+/* Class triggered by JavaScript to perform the rotation */
+.couple-portrait-card.is-flipped .portrait-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Base style for both front and back faces */
+.portrait-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Hides the back of the element when turned */
+  backface-visibility: hidden;
+  border-radius: 8px; /* Optional rounded corners */
+  overflow: hidden;
+}
+
+/* Front face styling */
+.portrait-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Back face styling - pre-rotated so it faces the correct way when flipped */
+.portrait-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg); /* Counter-rotated so text is readable */
+}
+
+/* Layout styles for your images and overlays */
+.portrait-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 15px;
+}
+
+.portrait-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  aspect-ratio: 4 / 3;
+  border: 2px solid rgba(217,165,102,0.8);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 12px 28px rgba(58,12,26,0.16);
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  cursor: pointer;
+}
+
+.portrait-frame.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.portrait-photo,
+.portrait-cartoon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portrait-cartoon {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, rgba(255,247,224,0.9), rgba(217,165,102,0.55));
+  padding: 18px;
+  object-fit: cover;
+}
+
+.portrait-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  background: linear-gradient(180deg, transparent, rgba(58,12,26,0.7));
+  color: #fff8e8;
+  pointer-events: none;
+}
+
+.portrait-caption {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 2.3vw, 14px);
+}
+
+.portrait-hint {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(13px, 2.6vw, 15px);
+  margin-top: 4px;
+}
+
+.countdown-card {
+  margin-top: 28px;
+  width: min(100%, 560px);
+  padding: 24px 20px 22px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255,250,243,0.92), rgba(243,227,195,0.78));
+  border: 1px solid rgba(217,165,102,0.45);
+  box-shadow: 0 18px 45px rgba(58,12,26,0.14);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.42) 45%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmer 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.countdown-label {
+  font-family: 'Cinzel', serif;
+  font-style: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: clamp(11px, 2.2vw, 13px);
+  color: var(--wine-mid);
+  margin-bottom: 14px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.countdown-tile {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(217,165,102,0.24);
+  border-radius: 16px;
+  padding: 12px 8px 10px;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 8px 18px rgba(58,12,26,0.08);
+  animation: countdownFloat 3.2s ease-in-out infinite;
+}
+
+.countdown-tile:nth-child(2) { animation-delay: .4s; }
+.countdown-tile:nth-child(3) { animation-delay: .8s; }
+.countdown-tile:nth-child(4) { animation-delay: 1.2s; }
+
+.countdown-value {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(24px, 4.8vw, 34px);
+  font-weight: 700;
+  color: var(--wine-deep);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.countdown-unit {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(13px, 2.6vw, 15px);
+  color: var(--wine-mid);
+}
+
+.countdown-note {
+  margin-top: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(14px, 3vw, 16px);
+  color: var(--wine);
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@keyframes countdownFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 section {
   padding: 70px 20px;
   max-width: 1080px;
@@ -647,23 +857,60 @@ section {
 
 .event-card {
   position: relative;
-  background: #fffaf1;
-  border-radius: 14px;
+  background: linear-gradient(145deg, #fffdf9 0%, #f8ebd3 100%);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(58,12,26,.12);
-  border: 1px solid rgba(217,165,102,.4);
-  transition: transform .35s ease, box-shadow .35s ease;
+  box-shadow: 0 14px 34px rgba(58,12,26,.12);
+  border: 1px solid rgba(217,165,102,.38);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(217,165,102,.08), transparent 45%, rgba(217,165,102,.04));
+  pointer-events: none;
 }
 
 .event-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 18px 40px rgba(58,12,26,.2);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 22px 46px rgba(58,12,26,.18);
+  border-color: rgba(217,165,102,.68);
 }
 
 .event-card .band { height: 8px; }
-.event-card .inner { padding: 28px 24px 30px; text-align: center; }
+.event-card .inner { padding: 24px 22px 26px; text-align: center; position: relative; z-index: 1; }
 .event-card .icon { width: 44px; height: 44px; margin: 0 auto 12px; }
 .event-card h3 { font-size: clamp(20px,4.4vw,24px); letter-spacing: .08em; }
+
+.event-icon-wrap {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255,250,243,0.95), rgba(243,227,195,0.9));
+  border: 1px solid rgba(217,165,102,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 8px 18px rgba(58,12,26,0.08);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.event-card:hover .event-icon-wrap {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 12px 24px rgba(58,12,26,0.12);
+}
+
+.event-note {
+  margin: 10px auto 12px;
+  max-width: 260px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(14px, 3vw, 15px);
+  color: var(--wine-mid);
+  line-height: 1.5;
+}
 
 .event-card .when {
   margin-top: 10px;
@@ -686,9 +933,10 @@ section {
   font-size: 11px;
   letter-spacing: .2em;
   text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 20px;
+  padding: 6px 14px;
+  border-radius: 999px;
   color: #fff;
+  box-shadow: 0 8px 18px rgba(58,12,26,0.12);
 }
 
 .haldi .band { background: var(--haldi); }
@@ -738,10 +986,10 @@ section {
 .photo-slot {
   width: 220px;
   height: 270px;
-  border-radius: 12px;
+  border-radius: 16px;
   flex-shrink: 0;
   background: linear-gradient(150deg, #f3e3c3, #e6cfa0);
-  border: 1px solid rgba(92,19,39,.25);
+  border: 2px solid rgba(217,165,102,0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -749,12 +997,25 @@ section {
   gap: 10px;
   color: var(--wine-mid);
   box-shadow: 0 10px 24px rgba(58,12,26,.15);
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .photo-slot svg {
   width: 34px;
   height: 34px;
   opacity: .6;
+  position: relative;
+  z-index: 1;
 }
 
 .photo-slot span {
@@ -763,6 +1024,11 @@ section {
   letter-spacing: .15em;
   text-transform: uppercase;
   opacity: .75;
+  position: relative;
+  z-index: 1;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,248,232,0.8);
 }
 
 /* footer */
@@ -797,5 +1063,126 @@ section {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+  }
+}
+
+/* Bride and groom countdown distance */
+.wedding-distance {
+  --distance-progress: 1;
+  width: min(100%, 560px);
+  margin: 18px auto 0;
+  display: grid;
+  grid-template-columns: clamp(54px, 16vw, 82px) minmax(96px, 1fr) clamp(54px, 16vw, 82px);
+  align-items: center;
+  gap: clamp(8px, 3vw, 18px);
+  padding: 0 clamp(4px, 2vw, 12px);
+}
+
+.distance-person {
+  width: clamp(54px, 16vw, 82px);
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(58,12,26,0.16));
+  transform: translateZ(0);
+}
+
+.distance-person-left {
+  justify-self: end;
+}
+
+.distance-person-right {
+  justify-self: start;
+}
+
+.distance-thread {
+  position: relative;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.distance-thread::before,
+.distance-thread::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(217,165,102,0.15);
+  transform: translateY(-50%);
+}
+
+.distance-thread::before {
+  left: 0;
+}
+
+.distance-thread::after {
+  right: 0;
+}
+
+.distance-thread-line {
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 12%, var(--wine-light) 50%, var(--gold) 88%, transparent 100%);
+  transform: scaleX(var(--distance-progress));
+  transform-origin: center;
+  transition: transform .8s ease;
+  box-shadow: 0 0 12px rgba(217,165,102,0.28);
+}
+
+.distance-thread-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,250,243,0.92);
+  border: 1px solid rgba(217,165,102,0.48);
+  color: var(--wine-mid);
+  font-size: 16px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 18px rgba(58,12,26,0.1);
+}
+
+.distance-caption {
+  width: min(100%, 560px);
+  margin: 8px auto 0;
+  padding: 0 10px;
+  color: var(--wine);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(15px, 3.8vw, 18px);
+  font-style: italic;
+  line-height: 1.35;
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  .wedding-distance {
+    grid-template-columns: 50px minmax(86px, 1fr) 50px;
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .distance-person {
+    width: 50px;
+  }
+
+  .distance-thread {
+    height: 30px;
+  }
+
+  .distance-thread-heart {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
   }
 }
