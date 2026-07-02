@@ -39,17 +39,72 @@
 
 <div id="site">
   <section class="hero">
-    <svg class="om" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- <svg class="om" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
       <path d="M20,60 C20,40 45,40 45,58 C45,72 28,74 24,64" />
       <path d="M45,58 C45,44 62,42 66,54 C70,66 58,70 54,62" />
       <path d="M50,30 C60,30 60,42 50,42" />
       <path d="M66,30 L80,60" />
       <path d="M72,42 C64,50 64,62 74,72" />
-    </svg>
+    </svg> -->
     <div class="eyebrow">The Wedding Of</div>
     <h1 class="names">Riya<span class="amp">weds</span>Gagandeep</h1>
     <p class="tagline">Two families, two hearts, one beautiful beginning. With the blessings of Shri Ganesh, we joyfully invite you to celebrate our union.</p>
-    <div class="date-strip">10 – 13 December 2026 &nbsp; · &nbsp; New Delhi</div>
+    <div class="date-strip">1 – 3 November 2026 &nbsp; · &nbsp; Chandigarh</div>
+
+   <div class="couple-portrait-card" id="portraitCard">
+  <div class="portrait-card-inner">
+    
+    <div class="portrait-face portrait-front">
+      <img class="portrait-photo" src="assets/couple.jpg" alt="Bride and Groom" />
+      <div class="portrait-overlay">
+        <div class="portrait-caption">The Bride &amp; Groom</div>
+        <div class="portrait-hint">Tap to reveal a Surprise</div>
+      </div>
+    </div>
+
+    <div class="portrait-face portrait-back">
+      <img class="portrait-photo" src="assets/couple_animated.png" alt="Bride and Groom Animated" />
+      <div class="portrait-overlay">
+        <div class="portrait-caption">The Bride &amp; Groom</div>
+        <div class="portrait-hint">Tap to go back</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <div class="countdown-card" aria-live="polite">
+      <div class="countdown-label">Counting down to our wedding day</div>
+      <div class="countdown-grid">
+        <div class="countdown-tile">
+          <span class="countdown-value" id="days">00</span>
+          <span class="countdown-unit">Days</span>
+        </div>
+        <div class="countdown-tile">
+          <span class="countdown-value" id="hours">00</span>
+          <span class="countdown-unit">Hours</span>
+        </div>
+        <div class="countdown-tile">
+          <span class="countdown-value" id="minutes">00</span>
+          <span class="countdown-unit">Minutes</span>
+        </div>
+        <div class="countdown-tile">
+          <span class="countdown-value" id="seconds">00</span>
+          <span class="countdown-unit">Seconds</span>
+        </div>
+      </div>
+      <div class="countdown-note">The celebration begins on 3 November 2026</div>
+    </div>
+
+    <div class="wedding-distance" aria-label="Bride and groom countdown distance">
+      <img class="distance-person distance-person-left" src="assets/Groom_wb.png" alt="Groom" loading="lazy">
+      <div class="distance-thread" aria-hidden="true">
+        <span class="distance-thread-line"></span>
+        <span class="distance-thread-heart">&hearts;</span>
+      </div>
+      <img class="distance-person distance-person-right" src="assets/Bride_wb.png" alt="Bride" loading="lazy">
+    </div>
+    <p class="distance-caption">Every sunrise brings them closer to forever.</p>
   </section>
 
   <section class="story">
@@ -67,10 +122,13 @@
        <div class="event-card mehndi">
         <div class="band"></div>
         <div class="inner">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10z"/></svg>
+          <div class="event-icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 3 6 6 6 10a6 6 0 0 1-12 0c0-4 3-7 6-10z"/></svg>
+          </div>
           <h3>Mehndi</h3>
           <div class="when">Sunday, 1 November 2026 · 7:00 PM</div>
           <div class="where">Kashyap Residence</div>
+          <p class="event-note">A colourful evening of laughter, music and joyful traditions.</p>
           <span class="tag">Evening Celebration</span>
         </div>
       </div>
@@ -78,10 +136,13 @@
       <div class="event-card haldi">
         <div class="band"></div>
         <div class="inner">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="14" r="6"/><path d="M12 2v4M8 4l1.5 3M16 4l-1.5 3"/></svg>
+          <div class="event-icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="14" r="6"/><path d="M12 2v4M8 4l1.5 3M16 4l-1.5 3"/></svg>
+          </div>
           <h3>Haldi</h3>
           <div class="when">Monday, 2 November 2026 · 10:00 AM</div>
           <div class="where">Kashyap Residence</div>
+          <p class="event-note">A warm and vibrant blessing ceremony filled with love and joy.</p>
           <span class="tag">Morning Blessing</span>
         </div>
       </div>
@@ -89,10 +150,13 @@
      <div class="event-card sangeet">
         <div class="band"></div>
         <div class="inner">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+          <div class="event-icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+          </div>
           <h3>Mama Swagat and Choora Ceremony</h3>
           <div class="when">Monday, 2 November 2026 · 4:00 PM</div>
           <div class="where">Kashyap Residence</div>
+          <p class="event-note">An evening of music, dance, laughter and cultural charm.</p>
           <span class="tag">Music &amp; Dance</span>
         </div>
       </div>
@@ -100,10 +164,13 @@
       <div class="event-card sangeet">
         <div class="band"></div>
         <div class="inner">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+          <div class="event-icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+          </div>
           <h3>Sangeet</h3>
           <div class="when">Friday, 11 December 2026 · 7:00 PM</div>
           <div class="where">The Grand Pavilion, New Delhi</div>
+          <p class="event-note">A night of rhythm, glamour and cherished memories.</p>
           <span class="tag">Music &amp; Dance</span>
         </div>
       </div>
@@ -111,10 +178,13 @@
       <div class="event-card shaadi">
         <div class="band"></div>
         <div class="inner">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="15" r="4"/><circle cx="16" cy="15" r="4"/></svg>
+          <div class="event-icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="15" r="4"/><circle cx="16" cy="15" r="4"/></svg>
+          </div>
           <h3>Shaadi</h3>
           <div class="when">Saturday, 12 December 2026 · 7:00 PM Onwards</div>
           <div class="where">Regal Gardens Banquet, New Delhi</div>
+          <p class="event-note">The sacred celebration of two hearts beginning one beautiful journey.</p>
           <span class="tag">The Wedding Ceremony</span>
         </div>
       </div>
@@ -122,10 +192,13 @@
       <div class="event-card reception">
         <div class="band"></div>
         <div class="inner">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3l1 8a4 4 0 0 0 8 0l1-8M12 15v6M9 21h6"/></svg>
+          <div class="event-icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3l1 8a4 4 0 0 0 8 0l1-8M12 15v6M9 21h6"/></svg>
+          </div>
           <h3>Reception</h3>
           <div class="when">Sunday, 13 December 2026 · 7:00 PM</div>
           <div class="where">The Grand Pavilion, New Delhi</div>
+          <p class="event-note">A graceful evening of dinner, laughter and heartfelt toasts.</p>
           <span class="tag">Dinner &amp; Toast</span>
         </div>
       </div>
@@ -137,7 +210,7 @@
     <p class="section-sub">A little preview — full gallery coming soon.</p>
     <div class="gallery-wrap">
       <div class="gallery-track" id="galleryTrack">
-        <div class="photo-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-4 4-3-3-6 6"/></svg><span>Add Photo</span></div>
+        <div class="photo-slot"><img src="assets/placeholder-photo-1.jpg" alt="Wedding photo placeholder" /><span>Add Photo</span></div>
         <div class="photo-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-4 4-3-3-6 6"/></svg><span>Add Photo</span></div>
         <div class="photo-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-4 4-3-3-6 6"/></svg><span>Add Photo</span></div>
         <div class="photo-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-4 4-3-3-6 6"/></svg><span>Add Photo</span></div>
