@@ -4,6 +4,8 @@
   var omButton = document.getElementById('omButton');
   var body = document.body;
   var track = document.getElementById('galleryTrack');
+  var petalField = document.getElementById('petalField');
+  var themeToggle = document.getElementById('themeToggle');
   
   // Kept your original reference, added a check for the new card ID structure
   var portraitFrame = document.getElementById('portraitCard') || document.getElementById('portraitFrame');
@@ -15,6 +17,36 @@
   var hoursValue = document.getElementById('hours');
   var minutesValue = document.getElementById('minutes');
   var secondsValue = document.getElementById('seconds');
+  function setTheme(isNight) {
+    body.classList.toggle('night-theme', isNight);
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-checked', isNight ? 'true' : 'false');
+      themeToggle.setAttribute('aria-label', isNight ? 'Switch original theme' : 'Switch night theme');
+    }
+    try {
+      localStorage.setItem('weddingTheme', isNight ? 'night' : 'original');
+    } catch (error) {
+      // localStorage can be unavailable in some privacy modes.
+    }
+  }
+
+  function loadTheme() {
+    var savedTheme = 'original';
+    try {
+      savedTheme = localStorage.getItem('weddingTheme') || 'original';
+    } catch (error) {
+      savedTheme = 'original';
+    }
+    setTheme(savedTheme === 'night');
+  }
+
+  loadTheme();
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      setTheme(!body.classList.contains('night-theme'));
+    });
+  }
 
   function updateDistanceThread(diff) {
     if (!distanceMeter) return;
@@ -52,6 +84,41 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+  function createPetals() {
+    if (!petalField) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var isSmallScreen = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+    var petalCount = isSmallScreen ? 14 : 24;
+
+    for (var i = 0; i < petalCount; i += 1) {
+      var petal = document.createElement('span');
+      var size = 12 + Math.random() * 13;
+      var sway = (Math.random() * 180 - 90).toFixed(0) + 'px';
+      var spin = (180 + Math.random() * 420).toFixed(0) + 'deg';
+      var duration = (15 + Math.random() * 14).toFixed(2) + 's';
+      var delay = (-Math.random() * 26).toFixed(2) + 's';
+      var scale = (.72 + Math.random() * .62).toFixed(2);
+      var opacity = (.42 + Math.random() * .32).toFixed(2);
+      var tilt = (10 + Math.random() * 38).toFixed(0) + 'deg';
+      var blur = Math.random() > .72 ? (.35 + Math.random() * .45).toFixed(2) + 'px' : '0px';
+
+      petal.className = 'petal';
+      petal.style.setProperty('--petal-left', (Math.random() * 100).toFixed(2) + 'vw');
+      petal.style.setProperty('--petal-size', size.toFixed(1) + 'px');
+      petal.style.setProperty('--petal-sway', sway);
+      petal.style.setProperty('--petal-spin', spin);
+      petal.style.setProperty('--petal-duration', duration);
+      petal.style.setProperty('--petal-delay', delay);
+      petal.style.setProperty('--petal-scale', scale);
+      petal.style.setProperty('--petal-opacity', opacity);
+      petal.style.setProperty('--petal-tilt', tilt);
+      petal.style.setProperty('--petal-blur', blur);
+      petalField.appendChild(petal);
+    }
+  }
+
+  createPetals();
 
   if (track) {
     track.innerHTML += track.innerHTML;
