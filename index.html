@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <title>Riya &amp; Gagandeep — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Tangerine:wght@400;700&family=Marcellus&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="locked">
+
+  <div class="petal-field" id="petalField" aria-hidden="true"></div>
+
+  <div class="theme-switcher" aria-label="Theme selector">
+    <span class="theme-label">Night</span>
+    <button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-checked="false"
+      aria-label="Switch night theme">
+      <span class="theme-toggle-track">
+        <span class="theme-toggle-thumb"></span>
+      </span>
+    </button>
+  </div>
+  <div id="intro" data-stage="front" aria-hidden="false">
+    <div class="intro-card-scene">
+      <div class="intro-card" id="introCard">
+        <div class="intro-face intro-front">
+          <div class="front-ornament"></div>
+
+          <div class="front-center">
+            <div class="front-ganesha" id="ganeshHolder">
+              <img class="front-ganesha-img" id="ganeshImg" src="ganesha.png" alt="Lord Ganesha" draggable="false">
+            </div>
+
+            <div class="front-mantra">श्री गणेशाय नमः</div>
+            <div class="front-subtitle">With the blessings of Lord Ganesha</div>
+            <div class="front-caption">Tap the sacred Om to enter the invitation</div>
+            <button class="om-button" id="omButton" aria-label="Open the invitation">ॐ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="site">
+    <section class="hero">
+      <!-- <svg class="om" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20,60 C20,40 45,40 45,58 C45,72 28,74 24,64" />
+      <path d="M45,58 C45,44 62,42 66,54 C70,66 58,70 54,62" />
+      <path d="M50,30 C60,30 60,42 50,42" />
+      <path d="M66,30 L80,60" />
+      <path d="M72,42 C64,50 64,62 74,72" />
+    </svg> -->
+      <div class="eyebrow typing-content"><span class="typing-line">The Wedding Of</span></div>
+      <div class="wedding-logo-wrap typing-content">
+        <img class="wedding-logo wedding-logo-light" src="assets/wedding_logo_light.png" alt="Wedding Logo"
+          onerror="this.onerror=null; this.src='assets/wedding_logo.jpeg'">
+        <img class="wedding-logo wedding-logo-night" src="assets/wedding_logo_night.png" alt="Wedding Logo Night"
+          onerror="this.onerror=null; this.src='assets/wedding_logo.jpeg'">
+      </div>
+      <h1 class="names typing-content">Gagandeep<span class="amp">weds</span>Riya</h1>
+      <p class="tagline" aria-live="polite">
+        <span class="typing-line">Two hearts met, two families came together,</span>
+        <span class="typing-line">and a beautiful forever began.</span>
+        <span class="typing-line">With the blessings of Shri Ganesh,</span>
+        <span class="typing-line">we’d love for you to celebrate this moment with us. 🤍</span>
+      </p>
+
+      <div class="couple-portrait-card" id="portraitCard">
+        <div class="portrait-card-inner">
+
+          <div class="portrait-face portrait-front">
+            <img class="portrait-photo" src="assets/couple.jpg" alt="Bride and Groom" />
+            <div class="portrait-overlay">
+              <div class="portrait-caption">The Bride &amp; Groom</div>
+              <div class="portrait-hint">Tap to reveal a Surprise</div>
+            </div>
+          </div>
+
+          <div class="portrait-face portrait-back">
+            <img class="portrait-photo" src="assets/couple_animated.png" alt="Bride and Groom Animated" />
+            <div class="portrait-overlay">
+              <div class="portrait-caption">The Bride &amp; Groom</div>
+              <div class="portrait-hint">Tap to go back</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="countdown-card" aria-live="polite">
+        <div class="countdown-label">ON OUR WAY TO FOREVER</div>
+        <div class="countdown-grid">
+          <div class="countdown-tile"><span class="countdown-value" id="days">00</span><span
+              class="countdown-unit">Days</span></div>
+          <div class="countdown-tile"><span class="countdown-value" id="hours">00</span><span
+              class="countdown-unit">Hours</span></div>
+          <div class="countdown-tile"><span class="countdown-value" id="minutes">00</span><span
+              class="countdown-unit">Minutes</span></div>
+          <div class="countdown-tile"><span class="countdown-value" id="seconds">00</span><span
+              class="countdown-unit">Seconds</span></div>
+        </div>
+      </div>
+
+      <div class="wedding-distance" aria-label="Bride and groom countdown distance">
+        <img class="distance-person distance-person-left" src="assets/Groom_wb.png" alt="Groom" loading="lazy">
+        <div class="distance-thread" aria-hidden="true">
+          <span class="distance-thread-line"></span>
+          <span class="distance-thread-heart">&hearts;</span>
+        </div>
+        <img class="distance-person distance-person-right" src="assets/Bride_wb.png" alt="Bride" loading="lazy">
+      </div>
+      <p class="distance-caption">Every sunrise brings them closer to forever.</p>
+
+      <div class="scratch-card" id="scratchCard" aria-labelledby="scratchInstruction">
+        <div class="scratch-card-inner">
+          <div class="date-reveal-content" id="dateRevealContent">
+            <!-- Decorative Royal Corner Flourishes -->
+            <svg class="plaque-corner plaque-corner-tl" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h8a2 2 0 0 0-2 2v6a2 2 0 0 1-2 2H2V2zm0 0v8a2 2 0 0 1 2-2h6a2 2 0 0 0 2-2V2H2z" fill="currentColor"/></svg>
+            <svg class="plaque-corner plaque-corner-tr" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2h-8a2 2 0 0 1 2 2v6a2 2 0 0 0 2 2h4V2zm0 0v8a2 2 0 0 0-2-2h-6a2 2 0 0 1-2-2V2h10z" fill="currentColor"/></svg>
+            <svg class="plaque-corner plaque-corner-bl" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 22h8a2 2 0 0 1-2-2v-6a2 2 0 0 0-2-2H2v10zm0 0v-8a2 2 0 0 0 2 2h6a2 2 0 0 1 2 2v4H2z" fill="currentColor"/></svg>
+            <svg class="plaque-corner plaque-corner-br" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 22h-8a2 2 0 0 0 2-2v-6a2 2 0 0 1 2-2h4v10zm0 0v-8a2 2 0 0 1-2 2h-6a2 2 0 0 0-2 2v4h10z" fill="currentColor"/></svg>
+
+            <div class="reveal-badge">
+              <span class="badge-gem">✦</span>
+              <span class="badge-text">SAVE THE DATE</span>
+              <span class="badge-gem">✦</span>
+            </div>
+
+            <div class="scratch-date" id="scratchDate">3 November 2026</div>
+
+            <div class="reveal-divider" aria-hidden="true">
+              <span class="rev-line"></span>
+              <span class="rev-motif">❦</span>
+              <span class="rev-line"></span>
+            </div>
+
+            <div class="reveal-day">
+              <span class="reveal-day-highlight">Tuesday</span>
+              <span class="reveal-day-dot">&bull;</span>
+              <span>Auspicious Wedding Day</span>
+            </div>
+
+            <div class="reveal-sparkles" aria-hidden="true">
+              <span class="sparkle sp-1">✧</span>
+              <span class="sparkle sp-2">✦</span>
+              <span class="sparkle sp-3">✧</span>
+              <span class="sparkle sp-4">✦</span>
+              <span class="sparkle sp-5">✧</span>
+              <span class="sparkle sp-6">✦</span>
+            </div>
+          </div>
+          <canvas id="scratchCanvas" aria-hidden="true"></canvas>
+        </div>
+        <div class="scratch-instruction" id="scratchInstruction">Scratch to reveal the auspicious date</div>
+        <button class="reveal-date-button" id="revealDateButton" type="button">Reveal date</button>
+        <div class="revealed-scroll-indicator" id="revealedScrollIndicator" aria-hidden="true">
+          <span>Scroll to explore celebrations</span>
+          <span class="revealed-arrow">&darr;</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="story post-reveal">
+      <div class="story-content">
+        <div class="story-tagline">A Little Love, A Lot Of Celebration</div>
+        <div class="story-heading">Gagandeep &amp; Riya are beginning their forever.</div>
+        <div class="divider">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+              d="M12 21s-7-4.7-9.5-9C.7 8.3 2.6 4.8 6 4.5c2.2-.2 4 1 6 3.5 2-2.5 3.8-3.7 6-3.5 3.4.3 5.3 3.8 3.5 7.5C19 16.3 12 21 12 21z" />
+          </svg>
+        </div>
+        <p class="story-desc">
+          Come celebrate this beautiful new chapter with colour, music, tradition, laughter, and all the love that
+          brought them here.
+        </p>
+      </div>
+    </section>
+
+    <section id="events" class="post-reveal">
+      <h2 class="section-title">Wedding Festivities</h2>
+      <p class="section-sub">Every function, its own colour, its own celebration — mark your calendars for a joyous few
+        days.</p>
+      <div class="events-grid">
+        <div class="event-card poojan">
+          <div class="band"></div>
+          <div class="inner">
+            <div class="event-icon-wrap" aria-hidden="true">✦</div>
+            <h3>Shanti Poojan</h3>
+            <div class="when">Monday, 2 November 2026</div>
+            <div class="where">12:00 PM</div>
+            <p class="event-note">A sacred beginning with prayers, blessings and family togetherness.</p>
+            <span class="tag">Auspicious Blessing</span>
+          </div>
+        </div>
+
+        <div class="event-card dj">
+          <div class="band"></div>
+          <div class="inner">
+            <div class="event-icon-wrap" aria-hidden="true">♫</div>
+            <h3>DJ</h3>
+            <div class="when">Monday, 2 November 2026</div>
+            <div class="where">7:00 PM</div>
+            <p class="event-note">Music, rhythm and celebration as the wedding joy begins to rise.</p>
+            <span class="tag">Music Celebration</span>
+          </div>
+        </div>
+
+
+        <div class="event-card barat">
+          <div class="band"></div>
+          <div class="inner">
+            <div class="event-icon-wrap" aria-hidden="true">✧</div>
+            <h3>Departure of Barat</h3>
+            <div class="when">Tuesday, 3 November 2026</div>
+            <div class="where">12:00 PM</div>
+            <p class="event-note">The wedding procession sets out with dhol, smiles and blessings.</p>
+            <span class="tag">Barat Procession</span>
+          </div>
+        </div>
+
+        <div class="event-card shaadi">
+          <div class="band"></div>
+          <div class="inner">
+            <div class="event-icon-wrap" aria-hidden="true">♡</div>
+            <h3>Wedding Ceremony</h3>
+            <div class="when">Tuesday, 3 November 2026</div>
+            <div class="where">Kochhar Farm, NH-22 Chandigarh-Kalka Road, Pinjore, Tagra Kali Ram (Haryana)</div>
+            <p class="event-note">Gagandeep and Riya begin their forever in a sacred celebration.</p>
+            <span class="tag">The Sacred Union</span>
+          </div>
+        </div>
+
+
+
+        <div class="event-card dham">
+          <div class="band"></div>
+          <div class="inner">
+            <div class="event-icon-wrap" aria-hidden="true">❖</div>
+            <h3>Brahm Bhoj (Dham)</h3>
+            <div class="when">Wednesday, 4 November 2026 &middot; 12:00 PM</div>
+            <div class="where">V.P.O. Tiamal, Teh. Dadasiba, Distt. Kangra (H.P.)</div>
+            <p class="event-note">A traditional feast shared with relatives, friends and heartfelt regards.</p>
+            <span class="tag">Family Feast</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="venue-section post-reveal" id="venue">
+      <h2 class="section-title">The Wedding Venue</h2>
+      <div class="venue-card">
+        <a class="venue-map" href="https://maps.app.goo.gl/2PMkmit66McSwjfk7?g_st=iw" target="_blank"
+          rel="noopener noreferrer" aria-label="Open Kochhar Farm in Google Maps">
+          <span class="map-road map-road-one"></span><span class="map-road map-road-two"></span><span
+            class="map-road map-road-three"></span>
+          <span class="map-water"></span><span class="map-pin" aria-hidden="true">⌖</span>
+          <span class="map-label">Kochhar Farm</span>
+        </a>
+        <div class="venue-details">
+          <div>
+            <h3>Kochhar Farm</h3>
+            <p>NH-22 Chandigarh-Kalka Road, Pinjore, Tagra Kali Ram (Haryana)</p>
+          </div>
+          <span class="venue-link-label">View on Google Maps ↗</span>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="blessing post-reveal">
+      <div class="script">With Love &amp; Blessings</div>
+      <p>Your presence is the greatest gift we could ask for. We can't wait to celebrate this beautiful journey with you
+        by our side.</p>
+      <div class="fam">The Thakur Family &nbsp;·&nbsp; The Kashyap Family</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
