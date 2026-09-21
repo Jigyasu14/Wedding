@@ -1,6 +1,31 @@
 (function () {
   'use strict';
 
+  function runSafely(name, initializer) {
+    try {
+      initializer();
+    } catch (error) {
+      console.error('Wedding feature failed: ' + name, error);
+    }
+  }
+
+  function forEachElement(elements, callback) {
+    for (var index = 0; index < elements.length; index += 1) {
+      callback(elements[index], index);
+    }
+  }
+
+  function getQueryParameter(name) {
+    var query = window.location.search.substring(1).split('&');
+    for (var index = 0; index < query.length; index += 1) {
+      var pair = query[index].split('=');
+      if (decodeURIComponent(pair[0] || '') === name) {
+        return decodeURIComponent((pair[1] || '').replace(/\+/g, ' '));
+      }
+    }
+    return null;
+  }
+
   var weddingConfig = {
     coupleNames: { groom: 'Gagandeep', bride: 'Riya' },
     weddingDate: '2026-11-03',
@@ -56,7 +81,7 @@
 
   var weddingDate = new Date(weddingConfig.weddingDate + 'T00:00:00');
   var countdownStartDate = new Date(weddingConfig.countdownStartDate + 'T00:00:00');
-  var dateOverride = new URLSearchParams(window.location.search).get('weddingDate');
+  var dateOverride = getQueryParameter('weddingDate');
   var nowDate = dateOverride && /^\d{4}-\d{2}-\d{2}$/.test(dateOverride)
     ? new Date(dateOverride + 'T12:00:00')
     : new Date();
@@ -108,7 +133,7 @@
     setTheme(savedTheme === 'night');
   }
 
-  loadTheme();
+  runSafely('theme', loadTheme);
 
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
@@ -209,8 +234,10 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
-  preloadCharacterStates();
-  updateDistanceThread();
+  runSafely('countdown', function () {
+    preloadCharacterStates();
+    updateDistanceThread();
+  });
 
   /* ============================================================
      PETAL AMBIENCE (Light Theme Petals & Night Theme Bubbles)
@@ -252,12 +279,14 @@
     }
   }
 
-  createPetals();
+  runSafely('petals', createPetals);
 
   var resizeTimeout;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(createPetals, 350);
+    resizeTimeout = setTimeout(function () {
+      runSafely('petals', createPetals);
+    }, 350);
   });
 
   if (track) {
@@ -302,13 +331,13 @@
     body.classList.add('typing-started');
 
     // Initialize scratch card so it's ready when scrolled into view
-    initializeScratchCard();
+    runSafely('scratch card', initializeScratchCard);
   }
 
-  document.querySelectorAll('.venue-map').forEach(function (link) {
+  forEachElement(document.querySelectorAll('.venue-map'), function (link) {
     link.href = weddingConfig.googleMapsUrl;
   });
-  document.querySelectorAll('#scratchDate, #revealedDate').forEach(function (dateElement) {
+  forEachElement(document.querySelectorAll('#scratchDate, #revealedDate'), function (dateElement) {
     dateElement.textContent = weddingConfig.displayDate;
   });
 
@@ -338,7 +367,7 @@
   function setRevealed() {
     isDateRevealed = true;
     body.classList.add('date-revealed');
-    lockedSections.forEach(function (section) {
+    forEachElement(lockedSections, function (section) {
       section.inert = false;
       section.removeAttribute('aria-hidden');
     });
@@ -673,10 +702,17 @@
     drawScratchSurface();
     window.addEventListener('resize', drawScratchSurface);
 
-    scratchCanvas.addEventListener('pointerdown', onPointerDown);
-    scratchCanvas.addEventListener('pointermove', onPointerMove);
-    scratchCanvas.addEventListener('pointerup', onPointerUp);
-    scratchCanvas.addEventListener('pointercancel', onPointerUp);
+    if (window.PointerEvent) {
+      scratchCanvas.addEventListener('pointerdown', onPointerDown);
+      scratchCanvas.addEventListener('pointermove', onPointerMove);
+      scratchCanvas.addEventListener('pointerup', onPointerUp);
+      scratchCanvas.addEventListener('pointercancel', onPointerUp);
+    } else {
+      scratchCanvas.addEventListener('touchstart', onPointerDown, { passive: false });
+      scratchCanvas.addEventListener('touchmove', onPointerMove, { passive: false });
+      scratchCanvas.addEventListener('touchend', onPointerUp);
+      scratchCanvas.addEventListener('touchcancel', onPointerUp);
+    }
 
     // Prevent page scroll only while dragging inside the canvas
     scratchCanvas.addEventListener('touchmove', function (event) {
@@ -697,7 +733,7 @@
   }
 
   // Initial locking of post-reveal sections
-  lockedSections.forEach(function (section) {
+  forEachElement(lockedSections, function (section) {
     section.inert = true;
     section.setAttribute('aria-hidden', 'true');
   });
