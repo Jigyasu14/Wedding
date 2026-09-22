@@ -19,11 +19,19 @@
     var query = window.location.search.substring(1).split('&');
     for (var index = 0; index < query.length; index += 1) {
       var pair = query[index].split('=');
-      if (decodeURIComponent(pair[0] || '') === name) {
-        return decodeURIComponent((pair[1] || '').replace(/\+/g, ' '));
+      try {
+        if (decodeURIComponent(pair[0] || '') === name) {
+          return decodeURIComponent((pair[1] || '').replace(/\+/g, ' '));
+        }
+      } catch (error) {
+        return null;
       }
     }
     return null;
+  }
+
+  function padNumber(value) {
+    return value < 10 ? '0' + value : String(value);
   }
 
   var weddingConfig = {
@@ -146,14 +154,15 @@
   ============================================================= */
   function getIsoDate(date) {
     var year = date.getFullYear();
-    var month = String(date.getMonth() + 1).padStart(2, '0');
-    var day = String(date.getDate()).padStart(2, '0');
+    var month = padNumber(date.getMonth() + 1);
+    var day = padNumber(date.getDate());
     return year + '-' + month + '-' + day;
   }
 
   function getActiveArtworkPair(dateStr) {
-    var matched = weddingConfig.weddingTimeline.find(function (item) {
-      return item.date === dateStr;
+    var matched = null;
+    forEachElement(weddingConfig.weddingTimeline, function (item) {
+      if (!matched && item.date === dateStr) matched = item;
     });
 
     if (matched && matched.brideImage && matched.groomImage) {
@@ -163,7 +172,7 @@
   }
 
   function preloadCharacterStates() {
-    weddingConfig.weddingTimeline.forEach(function (item) {
+    forEachElement(weddingConfig.weddingTimeline, function (item) {
       if (item.brideImage) {
         var imgB = new Image();
         imgB.src = item.brideImage;
@@ -192,7 +201,7 @@
     var todayIso = getIsoDate(nowDate);
     var artworkPair = getActiveArtworkPair(todayIso);
 
-    distancePeople.forEach(function (person) {
+    forEachElement(distancePeople, function (person) {
       person.style.setProperty('--distance-progress', progress.toFixed(4));
       var role = person.classList.contains('distance-person-left') ? 'groom' : 'bride';
       var src = artworkPair[role] || weddingConfig.assets.coupleDefault[role];
@@ -224,16 +233,18 @@
     var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    if (daysValue) daysValue.textContent = String(days).padStart(2, '0');
-    if (hoursValue) hoursValue.textContent = String(hours).padStart(2, '0');
-    if (minutesValue) minutesValue.textContent = String(minutes).padStart(2, '0');
-    if (secondsValue) secondsValue.textContent = String(seconds).padStart(2, '0');
+    if (daysValue) daysValue.textContent = padNumber(days);
+    if (hoursValue) hoursValue.textContent = padNumber(hours);
+    if (minutesValue) minutesValue.textContent = padNumber(minutes);
+    if (secondsValue) secondsValue.textContent = padNumber(seconds);
 
     updateDistanceThread();
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  runSafely('countdown', updateCountdown);
+  setInterval(function () {
+    runSafely('countdown', updateCountdown);
+  }, 1000);
   runSafely('countdown', function () {
     preloadCharacterStates();
     updateDistanceThread();
